@@ -2,7 +2,7 @@ import os
 
 #Función para generar una pausa por medio de un input de pantalla
 def next():
-  input('\nPresione cualquier tecla para continuar...')
+  input('\nPresione <enter> para continuar...')
 
 def again():
   S_N = input('\n¿Desea intentar nuevamente? S/N...')
@@ -37,7 +37,7 @@ def againEscapeNega(S_N):
   
 #Función para generar mensaje para selección de menu u opciones
 def seleccionar():
-  seleccion = input('\nDigite la opción a revisar...')
+  seleccion = input('\nIngrese la opción >>> ')
   return seleccion
 
 #Función para establecer unidades de medidad de longitud
