@@ -84,3 +84,69 @@ def limpiar():
     if((os.name == "ce") or (os.name == "nt") or (os.name == "dos")):
       os.system ("cls")
 
+def encabezado(a):
+  limpiar()
+  print('='*50)
+  print(a.center(50))
+  print('='*50)
+
+def menuOpcion(lista,item):
+  listaAux = []
+  index = 0
+
+  for i in range(len(lista)):
+    if not lista[i] in listaAux :
+      listaAux.append(lista[i])
+        
+  for i in range(len(listaAux)):
+    index += 1
+    print(index, listaAux[i])
+        
+  print(index+1,'Otr@')
+
+  opcion = int(input('\n' + str(item) + ' opción >>> '))
+  
+  if 1 <= opcion <= index:
+    elemento = listaAux[opcion-1] #resto uno porque las posiciones inician en 0
+    
+  #Se ingresa nueva marca a la base de datos
+  else:
+    elemento = input('\nIngrese ' + str(item) + ' >>> ')
+    #Se ingresa nacionalidad para nueva marca
+  
+  return elemento
+  
+def menuOpcionFijo(lista,item):
+  index = 0
+
+  for i in range(len(lista)):
+    index += 1
+    print(index, lista[i])
+  
+  opcion = int(input('\n' + str(item) + ' opción >>> '))
+  
+  if 1 <= opcion <= index:
+    elemento = lista[opcion-1] #resta uno porque las posiciones inician en 0
+  else:
+    elemento = 'xxxx'
+
+  return elemento
+  
+def encabezadoTabla():
+  print('*'*50)
+  print('|Cod  ',end='')
+  print('|Marca        ',end='')
+  print('|Nal ',end='')
+  print('|Color    ',end='')
+  print('|Tam',end='')
+  print('|Precio  ','|')
+  print('*'*50)
+
+def tabla(a,b,c,d,e,f):
+  print('|'+ a,' '*(4-len(a)),end='')
+  print('|'+ b,' '*(12-len(b)),end='')
+  print('|'+ c,' '*(3-len(c)),end='')
+  print('|'+ d,' '*(8-len(d)),end='')
+  print('|'+ e,' '*(2-len(e)),end='')
+  print('|'+ f,' '*(7-len(f)),'|')
+  print('-'*50)

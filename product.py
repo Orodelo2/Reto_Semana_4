@@ -1,112 +1,58 @@
 import miscellaneous as mis
 
 def add(lisCodigo,lisMarca,lisNacionalidad,lisColor,lisTamano,lisPrecio):
-  texto1= 'AGREGAR ---> PRODUCTO'
-
+  #Inicialización de ciclo While principal
   cond = True
-
   while cond :
     mis.limpiar()
-    
+    #Inicialización de ciclo Whilw secundario
     cond2 = True
     while cond2 : 
-      mis.limpiar()
-      print('='*50)
-      print(texto1.center(50))
-      print('='*50)
+      mis.encabezado('AGREGAR ---> PRODUCTO')
 
-      verificacion = input('Ingrese código del producto: ')
+      #Validación del código ingresado
+      verificacion = input('\nIngrese código del producto >>> ')
+      
+      #Inicio de captura de datos si el código es nuevo
       if not verificacion in lisCodigo : 
+        #Se asigna el código ingresado
         codigo = verificacion
         
         #Selección de Marca
+        mis.encabezado('AGREGAR ---> PRODUCTO')
         print('\n-------->Marca:')
-        lisMarcaAux = []
-        index = 0
-
-        for i in range(len(lisMarca)):
-          if not lisMarca[i] in lisMarcaAux :
-            lisMarcaAux.append(lisMarca[i])
-        
-        for i in range(len(lisMarcaAux)):
-          index += 1
-          print(index, lisMarcaAux[i])
-        
-        print(index+1,'Otra')
-
-        opcion = int(input('\nMarca opción>>> '))
-        if 1 <= opcion <= index:
-          marca = lisMarcaAux[opcion-1] #resto uno porque las posiciones inician en 0
-          indexnacionalidad = lisMarca.index(marca)
-          nacionalidad = lisNacionalidad[indexnacionalidad] 
-
-        #Se ingresa nueva marca a la base de datos
-        else:
-          marca = input('\nIngrese la marca: ')
-          #Se ingresa nacionalidad para nueva marca
-          lisNacionalidadAux = []
-          index = 0
+        marca = mis.menuOpcion(lisMarca,'Marca')
+     
+        #Selección de Nacionalidad
+        if not marca in lisMarca:
+          mis.encabezado('AGREGAR ---> PRODUCTO')
           print('\n-------->Nacionalidad:')   
-          #Crea lista para menú de nacioanlidades 
-          for i in range(len(lisNacionalidad)):
-            if not lisNacionalidad[i] in lisNacionalidadAux :
-              lisNacionalidadAux.append(lisNacionalidad[i])
-          #Crea menú de nacionalidades
-          for i in range(len(lisNacionalidadAux)):
-            index += 1
-            print(index, lisNacionalidadAux[i])
-          #Asigna la nacionalidad al producto, y un código para error
-          indexNal = int(input('\nNacionalidad opción>>>  '))
-          if 1 <= indexNal <= 2:
-            nacionalidad = lisNacionalidadAux[indexNal-1]
-          else:
-            nacionalidad = 'xxxx'
+          nacionalidad = mis.menuOpcionFijo(['Imp','Nal'],'Nacionalidad') 
+        else:
+          indexNal = lisMarca.index(marca)
+          nacionalidad = lisNacionalidad[indexNal]
 
         #Selección de Color
+        mis.encabezado('AGREGAR ---> PRODUCTO')
         print('\n-------->Color:')
-        lisColorAux = []
-        index = 0
-
-        for i in range(len(lisColor)):
-          if not lisColor[i] in lisColorAux :
-            lisColorAux.append(lisColor[i])
-        
-        for i in range(len(lisColorAux)):
-          index += 1
-          print(index, lisColorAux[i])
-        
-        print(index+1,'Otro')     
-        opcion = int(input('\nColor opción>>> '))
-        if 1 <= opcion <= index:
-          color = lisColorAux[opcion-1] #resta uno porque las posiciones inician en 0
-        else:
-          color = input('\nIngrese color: ')
+        color = mis.menuOpcion(lisColor,'Color')
         
         #Selección de Tamaño
+        mis.encabezado('AGREGAR ---> PRODUCTO')
         print('\n-------->Tamaño:')
-        lisTamanoAux = ['S','M','L','XL']
-        index = 0
-    
-        for i in range(len(lisTamanoAux)):
-          index += 1
-          print(index, lisTamanoAux[i])
+        tamano = mis.menuOpcionFijo(['S','M','L','XL'],'Tamaño')      
         
-        opcion = int(input('\nTamaño opción>>> '))
-        if 1 <= opcion <= index:
-          tamano = lisTamanoAux[opcion-1] #resta uno porque las posiciones inician en 0
-        else:
-          tamano = 'xxxx'
-
+        #Asignación de precio
+        mis.encabezado('AGREGAR ---> PRODUCTO')
         precio = input('\nIngrese Precio del producto: ')
-
-        mis.limpiar()
-        print('='*50)
-        print(texto1.center(50))
-        print('='*50)      
+        
+        #Confirmación de ingreso de datos
+        mis.encabezado('AGREGAR ---> PRODUCTO')     
         print('\n¿Desea agregar la siguiente información a la base de datos?\n')
-        print(codigo, marca, nacionalidad, color, tamano, precio)
-        guardar = mis.againEscapeNega(input('\nS/N >>> '))
+        mis.encabezadoTabla()
+        mis.tabla(codigo, marca, nacionalidad, color, tamano, precio)
 
+        guardar = mis.againEscapeNega(input('\nS/N >>> '))
         if guardar :
           lisCodigo.append(codigo)
           lisMarca.append(marca)
@@ -114,24 +60,18 @@ def add(lisCodigo,lisMarca,lisNacionalidad,lisColor,lisTamano,lisPrecio):
           lisColor.append(color)
           lisTamano.append(tamano)
           lisPrecio.append(precio)
-          cond2 = False
-        
+          cond2 = False  #Salida del While secundario si if es verdadero   
         else:
-          cond2 = mis.againEscapeNega(input('¿Reingresar información?\nS/N>>> '))        
-
+          cond2 = mis.againEscapeNega(input('¿Reingresar información?\nS/N>>> ')) #Salida del While secundario si if 'guardar' es falso       
+      #Opción de introducir un código diferente si se digitó uno existente o salir
       else:
-        mis.limpiar()
-        print('='*50)
-        print(texto1.center(50))
-        print('='*50)
+        mis.encabezado('AGREGAR ---> PRODUCTO')
         print('\nEl código',verificacion, 'ya existe en la base de datos')
-        cond2 = mis.again()
+        cond2 = mis.again() #Salida del While secundario si if 'verificación' es falso
 
-    mis.limpiar()
-    print('='*50)
-    print(texto1.center(50))
-    print('='*50)
-    cond = mis.againEscapeNega(input('\n¿Desea agregar un nuevo producto? S/N >>> '))
+    #Solicitud de ingresar un nuveo producto o salir del ciclo principal
+    mis.encabezado('AGREGAR ---> PRODUCTO')
+    cond = mis.againEscapeNega(input('\n¿Desea agregar un nuevo producto? S/N >>> '))#Salida del While principal si no se desea agregar un nuevo producto
 
 def show(lisCodigo,lisMarca,lisNacionalidad,lisColor,lisTamano,lisPrecio):
   texto= 'MOSTRAR ---> PRODUCTO'
