@@ -1,4 +1,4 @@
-7#Método Ingresar
+#Método Ingresar
 import miscellaneous as mis
 import product
 import menu
@@ -18,6 +18,7 @@ while ejecutar :
 
   if item == '1':
     None
+  
   elif item == '2':
     cond = True
     while cond:
@@ -50,13 +51,4 @@ while ejecutar :
   else:
     print('Opción no validad')
     mis.next()
-  
-
-print(lisCodigo)
-print(lisMarca)
-print(lisNacionalidad)
-print(lisColor)
-print(lisTamano)
-print(lisPrecio)
-
-  
+   

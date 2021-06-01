@@ -133,8 +133,6 @@ def add(lisCodigo,lisMarca,lisNacionalidad,lisColor,lisTamano,lisPrecio):
     print('='*50)
     cond = mis.againEscapeNega(input('\n¿Desea agregar un nuevo producto? S/N >>> '))
 
-  #return lisCodigo, lisMarca, lisNacionalidad, lisColor, lisTamano, lisPrecio
-
 def show(lisCodigo,lisMarca,lisNacionalidad,lisColor,lisTamano,lisPrecio):
   texto= 'MOSTRAR ---> PRODUCTO'
 
@@ -505,4 +503,67 @@ def update(lisCodigo,lisMarca,lisNacionalidad,lisColor,lisTamano,lisPrecio):
       cond = False
 
 def delete(lisCodigo,lisMarca,lisNacionalidad,lisColor,lisTamano,lisPrecio):
-  None
+  texto= 'ELIMINAR ---> PRODUCTO'
+
+  cond = True
+
+  while cond :
+    
+    if len(lisCodigo) > 0 :
+      mis.limpiar()
+      print('='*50)
+      print(texto.center(50))
+      print('='*50)
+
+      codigo = input('\nIngrese código del producto >>> ')
+      mis.limpiar()
+      print('='*50)
+      print(texto.center(50))
+      print('='*50)  
+
+      if codigo in lisCodigo:
+        i = lisCodigo.index(codigo)
+
+        a = len(lisCodigo[i])
+        b = len(lisMarca[i])
+        c = len(lisNacionalidad[i])
+        d = len(lisColor[i])
+        e = len(lisTamano[i])
+        f = len(lisPrecio[i])
+        print('|Cod  ',end='')
+        print('|Marca        ',end='')
+        print('|Nal ',end='')
+        print('|Color    ',end='')
+        print('|Tam',end='')
+        print('|Precio  ','|')
+        print('-'*50)
+        print('|'+ lisCodigo[i],' '*(4-a),end='')
+        print('|'+ lisMarca[i],' '*(12-b),end='')
+        print('|'+ lisNacionalidad[i],' '*(3-c),end='')
+        print('|'+ lisColor[i],' '*(8-d),end='')
+        print('|'+ lisTamano[i],' '*(2-e),end='')
+        print('|'+ lisPrecio[i],' '*(7-f),'|')
+
+        delete = mis.againEscapeNega(input('\n¿Eliminar la información relacionada? S/N >>> '))
+
+        if delete:
+          del lisCodigo[i]
+          del lisMarca[i]
+          del lisColor[i]
+          del lisTamano[i]
+          del lisPrecio[i]
+          del lisNacionalidad[i]
+          print('\n¡Acción exitosa!')
+          cond = mis.againEscapeNega(input('\n¿Realizar otra busqueda? S/N >>> '))
+
+        else:
+          mis.limpiar()
+          print('='*50)
+          print(texto.center(50))
+          print('='*50)
+          cond = mis.againEscapeNega(input('\n¿Realizar otra busqueda? S/N >>> '))
+
+    else:
+        print('\nNo hay productos registrados en la base de datos')
+        mis.next()
+        cond = False

@@ -35,7 +35,7 @@ def product():
   texto5 = '[3].  Consultar'
   texto6 = '[4].  Actualizar'
   texto7 = '[5].  Eliminar'
-  texto8 = '[6].  Salirr'
+  texto8 = '[6].  Salir'
 
   
   print('='*50)
